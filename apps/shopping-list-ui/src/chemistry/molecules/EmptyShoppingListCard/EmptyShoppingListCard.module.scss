@@ -1,0 +1,14 @@
+@import "../../variables/mixins";
+
+.emptyCard {
+  max-width: 625px;
+  margin: 5rem auto 0 auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  p {
+    width: fit-content;
+  }
+
+  @include material-buttons;
+}

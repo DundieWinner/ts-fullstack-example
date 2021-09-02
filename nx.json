@@ -27,12 +27,11 @@
     ]
   },
   "projects": {
-    "shopping-list": {
+    "shopping-list-api": {
       "tags": []
     },
-    "shopping-list-e2e": {
-      "tags": [],
-      "implicitDependencies": ["shopping-list"]
+    "shopping-list-ui": {
+      "tags": []
     }
   }
 }

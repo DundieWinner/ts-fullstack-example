@@ -1,25 +1,75 @@
 {
   "version": 2,
   "projects": {
-    "shopping-list": {
-      "root": "apps/shopping-list",
-      "sourceRoot": "apps/shopping-list/src",
+    "shopping-list-api": {
+      "root": "apps/shopping-list-api",
+      "sourceRoot": "apps/shopping-list-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/shopping-list-api",
+            "main": "apps/shopping-list-api/src/main.ts",
+            "tsConfig": "apps/shopping-list-api/tsconfig.app.json",
+            "assets": ["apps/shopping-list-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/shopping-list-api/src/environments/environment.ts",
+                  "with": "apps/shopping-list-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "shopping-list-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/shopping-list-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/shopping-list-api"],
+          "options": {
+            "jestConfig": "apps/shopping-list-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shopping-list-ui": {
+      "root": "apps/shopping-list-ui",
+      "sourceRoot": "apps/shopping-list-ui/src",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/shopping-list",
-            "index": "apps/shopping-list/src/index.html",
-            "main": "apps/shopping-list/src/main.tsx",
-            "polyfills": "apps/shopping-list/src/polyfills.ts",
-            "tsConfig": "apps/shopping-list/tsconfig.app.json",
+            "outputPath": "dist/apps/shopping-list-ui",
+            "index": "apps/shopping-list-ui/src/index.html",
+            "main": "apps/shopping-list-ui/src/main.tsx",
+            "polyfills": "apps/shopping-list-ui/src/polyfills.ts",
+            "tsConfig": "apps/shopping-list-ui/tsconfig.app.json",
             "assets": [
-              "apps/shopping-list/src/favicon.ico",
-              "apps/shopping-list/src/assets"
+              "apps/shopping-list-ui/src/favicon.ico",
+              "apps/shopping-list-ui/src/assets"
             ],
-            "styles": ["apps/shopping-list/src/styles.scss"],
+            "styles": ["apps/shopping-list-ui/src/styles.scss"],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -27,8 +77,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/shopping-list/src/environments/environment.ts",
-                  "with": "apps/shopping-list/src/environments/environment.prod.ts"
+                  "replace": "apps/shopping-list-ui/src/environments/environment.ts",
+                  "with": "apps/shopping-list-ui/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -51,12 +101,13 @@
         "serve": {
           "executor": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "shopping-list:build",
-            "hmr": true
+            "buildTarget": "shopping-list-ui:build",
+            "hmr": true,
+            "proxyConfig": "apps/shopping-list-ui/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "buildTarget": "shopping-list:build:production",
+              "buildTarget": "shopping-list-ui:build:production",
               "hmr": false
             }
           }
@@ -64,41 +115,15 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/shopping-list/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["apps/shopping-list-ui/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/shopping-list"],
+          "outputs": ["coverage/apps/shopping-list-ui"],
           "options": {
-            "jestConfig": "apps/shopping-list/jest.config.js",
+            "jestConfig": "apps/shopping-list-ui/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shopping-list-e2e": {
-      "root": "apps/shopping-list-e2e",
-      "sourceRoot": "apps/shopping-list-e2e/src",
-      "projectType": "application",
-      "targets": {
-        "e2e": {
-          "executor": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/shopping-list-e2e/cypress.json",
-            "devServerTarget": "shopping-list:serve",
-            "tsConfig": "apps/shopping-list-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "shopping-list:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/shopping-list-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -123,5 +148,5 @@
       }
     }
   },
-  "defaultProject": "shopping-list"
+  "defaultProject": "shopping-list-api"
 }

@@ -1,0 +1,9 @@
+@mixin material-buttons {
+  :global {
+    button.MuiButton-root {
+      font-family: 'Nunito', serif;
+      text-transform: none;
+      font-weight: 600;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400;1,600&display=swap');
+@import "./chemistry/variables/colors";
+
+body {
+  font-family: 'Nunito', serif;
+  margin: 0;
+  padding: 0;
+}
+
+h2, h3 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  color: $color-text-paragraph;
+}

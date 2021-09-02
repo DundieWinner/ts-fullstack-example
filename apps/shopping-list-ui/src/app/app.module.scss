@@ -1,0 +1,21 @@
+@import "../chemistry/variables/colors";
+
+.s {
+  .header {
+    background: $color-primary;
+    padding: 20px 30px;
+    color: white;
+
+    h2 {
+      text-transform: uppercase;
+      font-family: 'Dosis', serif;
+    }
+  }
+
+  .content {
+    max-width: 1025px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    justify-items: center;
+  }
+}

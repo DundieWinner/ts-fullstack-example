@@ -1,0 +1,20 @@
+@import "../../variables/mixins";
+
+.d {
+  padding: 2rem;
+  width: 500px;
+
+  .inputs {
+    > * {
+      display: block;
+
+      :global {
+        .MuiOutlinedInput-root {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @include material-buttons;
+}

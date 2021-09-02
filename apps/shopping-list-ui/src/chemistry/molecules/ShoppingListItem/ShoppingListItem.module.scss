@@ -1,0 +1,27 @@
+@import "../../variables/colors";
+@import "../../variables/mixins";
+
+.i {
+  padding: 24px 21px;
+
+  &.selected {
+    background: rgba(213, 223, 233, 0.17);
+    border: none;
+    text-decoration: line-through;
+
+    h3 {
+      color: $color-primary;
+      text-decoration: line-through 2px $color-primary;
+    }
+  }
+
+  .actions {
+    svg {
+      fill: $color-icons;
+    }
+  }
+}
+
+.dialog {
+  @include material-buttons;
+}
